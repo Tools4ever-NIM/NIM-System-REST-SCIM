@@ -1,29 +1,238 @@
 {
     "schema": {
-        "options": {},
         "crud_objects": {
-            "users": {
+            "Groups": {
                 "operations": {
-                    "users_get": {
+                    "GroupsList": {
                         "method": "get",
                         "call": {
-                            "path": "/users",
-                            "post_processing": "child_tables"
+                            "path": "/Groups"
                         },
                         "processing_options": {
-                            "output_field": "employees"
-                        },
-                        "query_parameters": {}
+                            "output_field": "Resources"
+                        }
                     }
                 },
-                "parameters": {},
+                "key": "externalId",
+                "resources": {
+                    "schemas": [
+                        "string"
+                    ],
+                    "displayName": "string*",
+                    "externalId": "string*",
+                    "members": [
+                        {
+                            "value": "string*",
+                            "$ref": "string*",
+                            "display": "string*"
+                        }
+                    ]
+                }
+            },
+            "EnterpriseUsers": {
+                "operations": {
+                    "EnterpriseUsersList": {
+                        "method": "get",
+                        "call": {
+                            "path": "/EnterpriseUser"
+                        },
+                        "processing_options": {
+                            "output_field": "Resources"
+                        }
+                    }
+                },
+                "key": "userName",
+                "resources": {
+                    "schemas": [
+                        "string*"
+                    ],
+                    "userName": "string*",
+                    "name": {
+                        "familyName": "_:string*",
+                        "givenName": "_:string*"
+                    },
+                    "active": "boolean*",
+                    "User:urn:ietf:params:scim:schemas:extension:enterprise:2.0:User": {
+                        "employeeNumber": "_:string*",
+                        "costCenter": "_:string*",
+                        "organization": "_:string*",
+                        "division": "_:string*",
+                        "department": "_:string*",
+                        "manager": {
+                            "value": "_:string*",
+                            "$ref": "_:string*",
+                            "displayName": "_:string*"
+                        }
+                    }
+                }
+            },
+            "Schemas": {
+                "operations": {
+                    "SchemasList": {
+                        "method": "get",
+                        "call": {
+                            "path": "/Schemas"
+                        },
+                        "processing_options": {
+                            "output_field": "Resources"
+                        }
+                    }
+                },
+                "key": "id",
+                "resources": {
+                    "attributes": [
+                        {
+                            "caseExact": "boolean",
+                            "description": "string*",
+                            "multiValued": "boolean*",
+                            "mutability": "string*",
+                            "name": "string*",
+                            "referenceTypes": "string*",
+                            "required": "boolean*",
+                            "returned": "string*",
+                            "type": "string*",
+                            "uniqueness": "string*"
+                        }
+                    ],
+                    "id": "string*",
+                    "name": "string*"
+                }
+            },
+            "ServiceProviderConfig": {
+                "operations": {
+                    "ServiceProviderConfigList": {
+                        "method": "get",
+                        "call": {
+                            "path": "/ServiceProviderConfig"
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        }
+                    }
+                },
+                "key": "schemas",
+                "resources": {
+                    "schemas": [
+                        "string*"
+                    ],
+                    "documentationUri": "string*",
+                    "patch": {
+                        "supported": "_:boolean*"
+                    },
+                    "bulk": {
+                        "supported": "_:boolean*",
+                        "maxOperations": "_:string*",
+                        "maxPayloadSize": "_:string*"
+                    },
+                    "filter": {
+                        "supported": "_:boolean*",
+                        "maxResults": "_:string*"
+                    },
+                    "changePassword": {
+                        "supported": "_:boolean*"
+                    },
+                    "sort": {
+                        "supported": "_:boolean*"
+                    },
+                    "etag": {
+                        "supported": "_:boolean*"
+                    },
+                    "authenticationSchemes": [
+                        {
+                            "name": "string*",
+                            "description": "string*",
+                            "type": "string*",
+                            "primary": "boolean*"
+                        }
+                    ],
+                    "meta": {
+                        "resourceType": "_:string*",
+                        "location": "_:string*"
+                    }
+                }
+            },
+            "Users": {
+                "operations": {
+                    "UsersList": {
+                        "method": "get",
+                        "call": {
+                            "path": "/Users"
+                        },
+                        "processing_options": {
+                            "output_field": "Resources"
+                        }
+                    },
+                    "UsersCreate": {
+                        "method": "post",
+                        "semantics": "create",
+                        "call": {
+                            "path": "/Users"
+                        },
+                        "processing_options": {
+                            "output_field": "Resources"
+                        },
+                        "body": {
+                            "_nim_merge_attributes_": true,
+                            "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"]
+                        },
+                        "resource_allowance_default": "optional",
+                        "resource_prohibited": [
+                            "id",
+                            "meta",
+                            "schemas"
+                        ],
+                        "resource_mandatory": [
+                            "userName",
+                            "active"
+                        ]
+                    },
+                    "UsersUpdate": {
+                        "method": "patch",
+                        "semantics": "update",
+                        "scimProtocol": true,
+                        "call": {
+                            "path": "/Users/{id}"
+                        },
+                        "processing_options": {
+                            "output_field": "Resources"
+                        },
+                        "body": {
+                            "_nim_merge_attributes_": true,
+                            "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"]
+                        },
+                        "resource_allowance_default": "optional",
+                        "resource_prohibited": [
+                            "meta",
+                            "schemas"
+                        ],
+                        "resource_mandatory": [
+                            "id"
+                        ]
+                    },
+                    "UsersDelete": {
+                        "method": "delete",
+                        "semantics": "delete",
+                        "call": {
+                            "path": "/Users/{id}"
+                        },
+                        "processing_options": {
+                            "output_field": "Resources"
+                        },
+                        "resource_allowance_default": "prohibited",
+                        "resource_mandatory": [
+                            "id"
+                        ]
+                    }
+                },
                 "key": "id",
                 "resources": {
                     "id": "string*",
-                    "schemas": ["string*"],
+                    "schemas": [
+                        "string*"
+                    ],
                     "externalId": "string*",
                     "meta": {
-                        "resourceType": "_:string*",   
+                        "resourceType": "_:string*",
                         "created": "_:string*",
                         "lastModified": "_:string*",
                         "location": "_:string*",
@@ -38,46 +247,91 @@
                         "honorificSuffix": "_:string*"
                     },
                     "userName": "string*",
-                    "phoneNumbers": [{
-                        "value": "_:string*",
-                        "type": "_:string*"
-                    }],
-                    "emails": [{
-                        "value": "_:string*",
-                        "type": "_:string*",
-                        "primary": "_:boolean*"
-                    }]
-
+                    "displayName": "string*",
+                    "nickName": "string*",
+                    "profileUrl": "string*",
+                    "title": "string*",
+                    "userType": "string*",
+                    "preferredLanguage": "string*",
+                    "locale": "string*",
+                    "timezone": "string*",
+                    "active": "boolean*",
+                    "password": "string*",
+                    "photos": "string*",
+                    "ims": [
+                        {
+                            "value": "string*",
+                            "type": "string*"
+                        }
+                    ],
+                    "phoneNumbers": [
+                        {
+                            "value": "string*",
+                            "type": "string*"
+                        }
+                    ],
+                    "emails": [
+                        {
+                            "value": "string*",
+                            "type": "string*",
+                            "primary": "boolean*"
+                        }
+                    ],
+                    "addresses": [
+                        {
+                            "formatted": "string*",
+                            "streetAddress": "string*",
+                            "locality": "string*",
+                            "region": "string*",
+                            "postalCode": "string*",
+                            "country": "string*",
+                            "type": "string*",
+                            "primary": "string*"
+                        }
+                    ],
+                    "groups": [
+                        "string*"
+                    ],
+                    "entitlements": [
+                        "string*"
+                    ],
+                    "roles": [
+                        {
+                            "value": "string*",
+                            "display": "string*",
+                            "primary": "boolean*"
+                        }
+                    ],
+                    "x509Certificates": [
+                        "string*"
+                    ]
                 }
             }
-           
         }
     },
     "rest": {
         "config": {
-            "baseUrl": "{tenant_id}",
+            "baseUrl": "https://{tenant_id}",
             "get": {
-                "maxPageCount": 500,
-                "query_parameters": {
-                },
                 "pagination": {
-                    "mode": "generic",
-                   "path":[],
-                    "page_size":998,
-                    "params":{
-                        "page":"{page_number}",
-                        "limit":999
+                    "mode": "skip_take",
+                    "params": {
+                        "count": "{take_count}",
+                        "startIndex": "{skip_count}"
                     }
                 }
             },
-            "authentication": "basic_auth",
+            "authentication": "aeries",
             "call_handling": "generic",
             "test_connection": {
-                "url": "/users"
+                "url": "/Users?count=1"
             },
-            "accept": "application/json"
+            "accept": "application/json",
+            "headers": {
+                "x-api-key": "{client_secret}",
+                "Authorization": "Bearer {client_secret}"
+            }
         }
-        
     },
     "connection": {
         "items": [
@@ -85,12 +339,6 @@
                 "name": "tenant_id",
                 "type": "textbox",
                 "label": "URL:",
-                "value": ""
-            },
-            {
-                "name": "bearer_token",
-                "type": "textbox",
-                "label": "Token:",
                 "value": ""
             }
         ]
